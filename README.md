@@ -1,60 +1,56 @@
-# Chromatique Art Gallery Backend
+# Spring Boot Backend Application with MongoDB
 
-This repository contains the backend code for the Chromatique Art Gallery application. It provides APIs and services to manage art pieces, artists, exhibitions, and user interactions.
+This repository contains the backend code for a Spring Boot application integrated with MongoDB. It provides RESTful APIs to manage entities and supports user authentication, CRUD operations, and more.
 
 ## Features
 
-- **Artist Management**: Add, update, and manage artist profiles.
-- **Art Pieces**: CRUD operations for artworks.
-- **Exhibitions**: Manage gallery exhibitions and schedules.
-- **User Authentication**: Secure login and registration.
-- **Search and Filter**: Search for artworks and filter by artist, category, or exhibition.
+- **User Management**: Register, login, and manage user profiles.
+- **Entity CRUD Operations**: Create, read, update, and delete entities.
+- **MongoDB Integration**: Seamless integration with MongoDB for data persistence.
+- **Secure Authentication**: JWT-based authentication for secure access.
 - **RESTful APIs**: Well-structured APIs for frontend integration.
+- **Error Handling**: Centralized exception handling for consistent error responses.
 
 ## Prerequisites
 
 Ensure you have the following installed:
 
-- [Node.js](https://nodejs.org/) (v14 or later)
-- [npm](https://www.npmjs.com/) or [yarn](https://yarnpkg.com/)
-- [MongoDB](https://www.mongodb.com/) (or any other database you plan to use)
+- [Java JDK](https://www.oracle.com/java/technologies/javase-downloads.html) (v11 or later)
+- [Maven](https://maven.apache.org/) or [Gradle](https://gradle.org/)
+- [MongoDB](https://www.mongodb.com/) (local or cloud instance)
 
 ## Installation
 
 1. Clone the repository:
 
     ```bash
-    git clone https://github.com/your-username/chromatique-art-gallery-backend.git
-    cd chromatique-art-gallery-backend
+    git clone https://github.com/your-username/spring-boot-mongodb-backend.git
+    cd spring-boot-mongodb-backend
     ```
 
-2. Install dependencies:
+2. Configure the application properties:
+
+    Open the `src/main/resources/application.properties` file and update the following:
+
+    ```properties
+    server.port=8080
+    spring.data.mongodb.uri=mongodb://localhost:27017/your-database
+    jwt.secret=your_secret_key
+    ```
+
+3. Build the project:
 
     ```bash
-    npm install
+    ./mvnw clean install
     ```
 
-3. Create a `.env` file in the root directory and configure the following variables:
-
-    ```env
-    PORT=5000
-    DATABASE_URL=mongodb://localhost:27017/chromatique
-    JWT_SECRET=your_secret_key
-    ```
-
-4. Start the development server:
+4. Run the application:
 
     ```bash
-    npm run dev
+    ./mvnw spring-boot:run
     ```
 
-    The server will run at `http://localhost:5000`.
-
-## Scripts
-
-- `npm run dev`: Start the development server with hot-reloading.
-- `npm start`: Start the production server.
-- `npm test`: Run tests.
+    The server will run at `http://localhost:8080`.
 
 ## API Endpoints
 
@@ -63,44 +59,42 @@ Ensure you have the following installed:
 - `POST /api/auth/register`: Register a new user.
 - `POST /api/auth/login`: Login a user.
 
-### Artists
+### Entities
 
-- `GET /api/artists`: Get all artists.
-- `POST /api/artists`: Add a new artist.
-- `PUT /api/artists/:id`: Update an artist.
-- `DELETE /api/artists/:id`: Delete an artist.
-
-### Art Pieces
-
-- `GET /api/artworks`: Get all artworks.
-- `POST /api/artworks`: Add a new artwork.
-- `PUT /api/artworks/:id`: Update an artwork.
-- `DELETE /api/artworks/:id`: Delete an artwork.
-
-### Exhibitions
-
-- `GET /api/exhibitions`: Get all exhibitions.
-- `POST /api/exhibitions`: Add a new exhibition.
-- `PUT /api/exhibitions/:id`: Update an exhibition.
-- `DELETE /api/exhibitions/:id`: Delete an exhibition.
+- `GET /api/entities`: Get all entities.
+- `POST /api/entities`: Add a new entity.
+- `GET /api/entities/{id}`: Get a specific entity by ID.
+- `PUT /api/entities/{id}`: Update an entity.
+- `DELETE /api/entities/{id}`: Delete an entity.
 
 ## Folder Structure
 
 ```
-chromatique-art-gallery-backend/
+spring-boot-mongodb-backend/
 ├── src/
-│   ├── controllers/
-│   ├── models/
-│   ├── routes/
-│   ├── middlewares/
-│   ├── utils/
-│   └── app.js
-├── tests/
-├── .env
+│   ├── main/
+│   │   ├── java/
+│   │   │   └── com/example/backend/
+│   │   │       ├── controllers/
+│   │   │       ├── models/
+│   │   │       ├── repositories/
+│   │   │       ├── services/
+│   │   │       ├── config/
+│   │   │       └── Application.java
+│   │   └── resources/
+│   │       ├── application.properties
+│   │       └── static/
+│   └── test/
 ├── .gitignore
-├── package.json
+├── pom.xml
 └── README.md
 ```
+
+## Scripts
+
+- `./mvnw spring-boot:run`: Start the development server.
+- `./mvnw test`: Run tests.
+- `./mvnw package`: Build the application.
 
 ## Contributing
 
